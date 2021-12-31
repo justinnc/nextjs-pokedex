@@ -34,7 +34,7 @@ const Header = () => {
 
         <Navbar.Brand>
           <Link href='/pokemon'>
-            <a className='md:text-3xl subpixel-antialiased font-[500] text-stone-500'>
+            <a className='text-xl md:text-3xl subpixel-antialiased font-[500] text-stone-500'>
               PokéDex
             </a>
           </Link>

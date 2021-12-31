@@ -4,7 +4,7 @@ const axios = Axios.create({
   baseURL: 'https://pokeapi.co/api/v2',
 });
 
-export const createApiRequest = async () => {
+export const createApiRequest = async (url, method, data) => {
   try {
     const response = await axios({
       url,
@@ -19,9 +19,6 @@ export const createApiRequest = async () => {
   } catch (err) {
     console.error(err);
     throw new Error(err);
-    // const statusCode = err.response.status;
-    // const messages = err.response.data.data[0].messages;
-    // throw new Error(JSON.stringify({ statusCode, messages }));
   }
 };
 export const baseImageUrl =
