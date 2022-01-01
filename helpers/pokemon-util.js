@@ -1,6 +1,12 @@
 export const getPokemonIdFormUrl = (url) => {
   const id = url?.split('/').slice(-2)[0];
 
+  const result = formatPokemonId(id);
+
+  return result;
+};
+
+export const formatPokemonId = (id) => {
   if (id < 10) {
     return `00${id}`;
   }
@@ -18,6 +24,29 @@ export const importImages = (image, filetype) => {
 
 export const importPokemonImage = (image) => {
   return `${process.env.PUBLIC_URL}/assets/pokemons/${image}.png`;
+};
+
+export const leftPad = (number, targetLength) => {
+  let output = Math.abs(number).toString();
+  while (output.length < Math.abs(targetLength)) {
+    output = '0' + output;
+  }
+  return output;
+};
+
+export const transformStatNames = (statName) => {
+  const map = [
+    ['special-attack', 'Sp. Atk'],
+    ['special-defense', 'Sp. Def'],
+  ];
+  let transformed = statName;
+  map.forEach(([a, b]) => {
+    if (a === statName) {
+      transformed = b;
+    }
+  });
+
+  return transformed;
 };
 
 export const PokemonTypePlaceholders = {

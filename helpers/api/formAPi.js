@@ -1,7 +1,7 @@
 import { HTTP_METHODS } from '../../constants/index';
 import { createApiRequest } from './axios';
 
-const getPokemons = (limit, offset) => {
+const getPokemons = (offset, limit = 50) => {
   return createApiRequest(
     `/pokemon/?limit=${limit}&offset=${offset}`,
     HTTP_METHODS.GET,

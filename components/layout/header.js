@@ -1,23 +1,11 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
-import {
-  Navbar,
-  Container,
-  Form,
-  InputGroup,
-  FormControl,
-} from 'react-bootstrap';
+import { Navbar, InputGroup, FormControl } from 'react-bootstrap';
 import { CgSearch } from 'react-icons/cg';
 
 const Header = () => {
   return (
-    <Navbar
-      className='justify-between w-full shadow-lg '
-      expand='lg'
-      variant='light'
-      bg='light'
-    >
+    <Navbar className='justify-between w-full shadow-lg '>
       <div className='flex items-center justify-between h-16 mx-6 md:mx-12'>
         <div className='flex h-10 bg-gray-100 border-2 border-gray-500 rounded-full align-center'>
           <InputGroup className='flex pl-2'>

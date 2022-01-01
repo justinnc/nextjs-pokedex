@@ -1,41 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { getPokemons } from '../../helpers/api/formAPi';
-import { importImages, getPokemonIdFormUrl } from '../../helpers/pokemon-util';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPokemonIdFormUrl } from '../../helpers/pokemon-util';
+import {
+  fetchPokemons,
+  pokemonsSelector,
+} from '../../features/pokemon/pokemonSlice';
+
 import PokemonItem from './pokemon-item';
-
-import { fetchPokemons } from '../../features/pokemon/pokemonSlice';
-
+import LoadingProgress from '../loading-progress/loading-progress';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-const PokemonList = ({ pokemons }) => {
+const PokemonList = (props) => {
+  const [pokemonLists, setPokemonLists] = useState(props?.pokemons || []);
+
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   const params = { offset: pokemonLists.length };
+  const pokemons = useSelector(pokemonsSelector);
 
-  //   dispatch(fetchPokemons(params));
-  // }, []);
-
-  const [pokemonLists, setPokemonLists] = useState(pokemons);
+  useEffect(() => {
+    if (pokemons) {
+      setPokemonLists([...pokemonLists, ...pokemons]);
+    }
+  }, [pokemons]);
 
   const getMorePokemon = async () => {
-    const newPokemons = await getPokemons(
-      pokemonLists.length,
-      pokemonLists.length
-    );
-    console.log('🚀 getMorePokemon ~ newPokemons', newPokemons);
-
-    const { results } = newPokemons;
-
-    const mapImageToList = results.map((pokemon) => ({
-      ...pokemon,
-      image: importImages(getPokemonIdFormUrl(pokemon.url)),
-    }));
-
-    console.log('mapImageToList', mapImageToList);
-
-    setPokemonLists([...pokemonLists, ...mapImageToList]);
+    const params = { offset: pokemonLists.length };
+    dispatch(fetchPokemons(params));
   };
 
   return (
@@ -43,17 +33,16 @@ const PokemonList = ({ pokemons }) => {
       dataLength={pokemonLists.length} //This is important field to render the next data
       next={getMorePokemon}
       hasMore={true}
-      loader={<h4>Loading...</h4>}
+      loader={<LoadingProgress />}
       endMessage={
         <p style={{ textAlign: 'center' }}>
           <b>Yay! You have seen it all</b>
         </p>
       }
-      // below props only if you need pull down functionality
     >
-      <div className='flex flex-wrap'>
+      <div className='flex flex-wrap justify-center'>
         {pokemonLists?.length !== 0 &&
-          pokemonLists?.map((pokemon, index) => {
+          pokemonLists?.map((pokemon) => {
             return (
               <PokemonItem
                 key={getPokemonIdFormUrl(pokemon.url)}

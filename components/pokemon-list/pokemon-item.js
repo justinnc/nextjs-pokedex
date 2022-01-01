@@ -1,21 +1,27 @@
 import React from 'react';
-import Image from 'next/image';
-import { getPokemonIdFormUrl } from '../../helpers/pokemon-util';
+import { importImages, getPokemonIdFormUrl } from '../../helpers/pokemon-util';
 
+import Image from 'next/image';
+import Link from 'next/link';
 import upperFirst from 'lodash/upperFirst';
 
 const PokemonItem = (props) => {
-  const { name, url, image } = props.pokemon;
+  const { name, url } = props.pokemon;
+
+  const id = getPokemonIdFormUrl(url);
+  const imageUrl = importImages(id);
 
   return (
-    <div className='p-4 transition-colors duration-200 border w-28 md:h-52 md:w-36 hover:bg-stone-200 '>
-      <h3 className='text-2xl font-bold text-stone-500'>
-        {getPokemonIdFormUrl(url)}
-      </h3>
-      <h3 className='font-[500] text-stone-400 pb-2'>{upperFirst(name)}</h3>
+    <Link href={`/pokemon/${name}`}>
+      <a>
+        <div className='p-4 transition-colors duration-200 border w-28 md:h-52 md:w-[8.9rem] hover:bg-stone-200'>
+          <h3 className='text-2xl font-bold text-stone-500'>{id}</h3>
+          <h3 className='font-[500] text-stone-400 pb-2'>{upperFirst(name)}</h3>
 
-      <Image src={image} alt={name} width={150} height={150} />
-    </div>
+          <Image src={imageUrl} alt={name} width={150} height={150} />
+        </div>
+      </a>
+    </Link>
   );
 };
 
