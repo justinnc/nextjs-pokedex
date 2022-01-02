@@ -12,7 +12,7 @@ const PokemonStatsDetail = ({ stats }) => {
         : (Number(resource.base_stat) * 2 + 99) * 1.1,
   }));
 
-  const total = formattedStats.reduce((sum, { min }) => sum + min, 0);
+  const total = formattedStats?.reduce((sum, { min }) => sum + min, 0);
 
   return (
     <ul className='mt-5 pl-0 w-full md:w-3/4'>

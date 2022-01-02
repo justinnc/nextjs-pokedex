@@ -29,7 +29,7 @@ export const PokemonBiography = (props) => {
         content={pokemon?.abilities.map((ability, index) => (
           <div
             key={`ability=${ability.ability.name}`}
-            className='capitalize mx-1 bg-gray-400 p-2 shadow-md rounded-md my-2 text-white'
+            className='capitalize mx-1 bg-gray-400 p-2 shadow-md rounded-md mb-2 text-white'
           >
             {ability.ability.name} {ability.isHidden && '(Hidden Ability)'}
           </div>

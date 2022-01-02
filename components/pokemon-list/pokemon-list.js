@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPokemonIdFormUrl } from '../../helpers/pokemon-util';
 import {
-  fetchPokemons,
+  getPokemonsAction,
   pokemonsSelector,
 } from '../../features/pokemon/pokemonSlice';
 
@@ -15,7 +15,7 @@ const PokemonList = (props) => {
 
   const dispatch = useDispatch();
 
-  const pokemons = useSelector(pokemonsSelector);
+  const { pokemons } = useSelector(pokemonsSelector);
 
   useEffect(() => {
     if (pokemons) {
@@ -25,7 +25,7 @@ const PokemonList = (props) => {
 
   const getMorePokemon = async () => {
     const params = { offset: pokemonLists.length };
-    dispatch(fetchPokemons(params));
+    dispatch(getPokemonsAction(params));
   };
 
   return (

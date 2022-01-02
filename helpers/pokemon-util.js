@@ -1,9 +1,7 @@
-export const getPokemonIdFormUrl = (url) => {
+export const getPokemonIdFormUrl = (url, onlyId = false) => {
   const id = url?.split('/').slice(-2)[0];
 
-  const result = formatPokemonId(id);
-
-  return result;
+  return id;
 };
 
 export const formatPokemonId = (id) => {

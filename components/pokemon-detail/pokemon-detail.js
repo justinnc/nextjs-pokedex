@@ -6,12 +6,10 @@ import Image from 'next/image';
 import { importImages, formatPokemonId } from '../../helpers/pokemon-util';
 import PokemonStatsDetail from './pokemon-stats';
 import PokemonBiography from './pokemon-biography';
+import PokemonEvolutions from './pokemon-evolutions';
 
 const PokemonDetail = (props) => {
-  console.log('name', props.pokemon);
-
   const imageUrl = importImages(formatPokemonId(props.pokemon?.id));
-
   const name = props.pokemon?.name;
 
   return (
@@ -30,6 +28,7 @@ const PokemonDetail = (props) => {
           <PokemonStatsDetail stats={props.pokemon?.stats} />
         </div>
       </div>
+      <PokemonEvolutions />
     </div>
   );
 };
