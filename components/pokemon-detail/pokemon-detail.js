@@ -28,7 +28,7 @@ const PokemonDetail = (props) => {
           <PokemonStatsDetail stats={props.pokemon?.stats} />
         </div>
       </div>
-      <PokemonEvolutions />
+      <PokemonEvolutions evolution={props.evolution} />
     </div>
   );
 };

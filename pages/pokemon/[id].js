@@ -20,11 +20,8 @@ const PokemonDetailPage = (props) => {
 
   const { data: evolution, status: evolutionStatus } =
     useSelector(pokemonEvoSelector);
-  console.log(' evolution', evolution);
 
   const evolutionTo = _.map(evolution, 'species', 'evolves_to.species');
-
-  console.log('evolutionTo', evolutionTo);
 
   useEffect(() => {
     if (id) {
